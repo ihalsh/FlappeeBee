@@ -9,5 +9,7 @@ class Constants {
 
         //Flapee
         const val COLLISION_RADIUS = 24f
+        const val DIVE_ACCEL = 0.75f
+        const val FLY_ACCEL = 15f
     }
 }

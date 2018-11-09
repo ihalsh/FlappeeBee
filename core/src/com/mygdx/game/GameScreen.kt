@@ -25,6 +25,8 @@ class GameScreen : KtxScreen {
         clearScreen(BLACK.r, BLACK.g, BLACK.b)
         batch.projectionMatrix = viewport.camera.combined
 
+        flapee.update(delta)
+
         with(shapeRenderer) {
             setAutoShapeType(true)
             projectionMatrix = viewport.camera.combined
