@@ -9,6 +9,8 @@ import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_WIDTH
 import com.mygdx.game.Utils.Constants.Companion.DISTANCE_BETWEEN_FLOOR_AND_CEILING
 import com.mygdx.game.Utils.Constants.Companion.MAX_SPEED_PER_SECOND
+import com.badlogic.gdx.math.Intersector
+
 
 class Flower(val position: Vector2 = Vector2()) {
 
@@ -37,6 +39,18 @@ class Flower(val position: Vector2 = Vector2()) {
         floorCollisionRectangle.setX(position.x)
         ceilingCollisionRectangle.setX(position.x)
         ceilingCollisionCircle.setX(position.x + floorCollisionRectangle.width / 2)
+    }
+
+    fun isFlappeeColliding(flappee: Flappee): Boolean {
+        val flappeeCollisionCircle = Circle(flappee.position, COLLISION_CIRCLE_RADIUS)
+        return Intersector.overlaps(flappeeCollisionCircle,
+                ceilingCollisionCircle) ||
+                Intersector.overlaps(flappeeCollisionCircle,
+                        floorCollisionCircle) ||
+                Intersector.overlaps(flappeeCollisionCircle,
+                        ceilingCollisionRectangle) ||
+                Intersector.overlaps(flappeeCollisionCircle,
+                        floorCollisionRectangle)
     }
 
     fun drawDebug(shapeRenderer: ShapeRenderer) {

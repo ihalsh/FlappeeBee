@@ -12,7 +12,7 @@ import com.mygdx.game.Utils.Constants.Companion.FLY_ACCEL
 import com.mygdx.game.Utils.Constants.Companion.WORLD_HEIGHT
 import ktx.graphics.circle
 
-class Flappee(private val position: Vector2 = Vector2()) {
+class Flappee(val position: Vector2 = Vector2()) {
 
     fun update(delta: Float) {
         position.y -= DIVE_ACCEL

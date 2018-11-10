@@ -3,7 +3,6 @@ package com.mygdx.game
 import com.badlogic.gdx.graphics.Color.BLACK
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.MathUtils.random
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.DelayedRemovalArray
@@ -11,7 +10,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.Entities.Flappee
 import com.mygdx.game.Entities.Flower
 import com.mygdx.game.Utils.Constants
-import com.mygdx.game.Utils.Constants.Companion.MAX_SPEED_PER_SECOND
 import com.mygdx.game.Utils.Constants.Companion.WORLD_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.WORLD_WIDTH
 import ktx.app.KtxScreen
@@ -25,6 +23,14 @@ class GameScreen : KtxScreen {
     private val batch = SpriteBatch()
     private val flapee = Flappee(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
     private val flowers = DelayedRemovalArray<Flower>()
+    private var score = 0
+
+    private fun restart() {
+        flapee.position.set(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
+        flowers.clear()
+        score = 0
+        info { "Game restarted." }
+    }
 
     override fun render(delta: Float) {
         viewport.apply()
@@ -34,7 +40,11 @@ class GameScreen : KtxScreen {
         flapee.update(delta)
         checkIfNewFlowerIsNeeded()
         removeFlowersIfPassed()
-        for (flower in flowers) flower.update(delta)
+        for (flower in flowers) {
+            flower.update(delta)
+            //Check for collision
+            if (flower.isFlappeeColliding(flapee)) restart()
+        }
 
         with(shapeRenderer) {
             setAutoShapeType(true)
