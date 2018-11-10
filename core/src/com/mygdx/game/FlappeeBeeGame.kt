@@ -3,11 +3,13 @@ package com.mygdx.game
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.mygdx.game.Utils.Constants.Companion.BACKGROUND
 import com.mygdx.game.Utils.Constants.Companion.BEE
 import com.mygdx.game.Utils.Constants.Companion.FLOWER_BOTTOM
 import com.mygdx.game.Utils.Constants.Companion.FLOWER_TOP
+import com.mygdx.game.Utils.Constants.Companion.FRAME_DURATION
 import com.mygdx.game.Utils.Constants.Companion.TILE_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.TILE_WIDTH
 import ktx.app.KtxGame
@@ -21,8 +23,7 @@ class FlappeeBeeGame : KtxGame<Screen>() {
         lateinit var flowerBottomTexture: Texture
         lateinit var flowerTopTexture: Texture
         lateinit var beeTexture: Texture
-        lateinit var firstBeeTexture: TextureRegion
-        lateinit var secondBeeTexture: TextureRegion
+        lateinit var animation: Animation<TextureRegion>
     }
 
     override fun create() {
@@ -50,9 +51,11 @@ class FlappeeBeeGame : KtxGame<Screen>() {
             flowerTopTexture = get(FLOWER_TOP, Texture::class.java)
             beeTexture = get(BEE, Texture::class.java)
         }
-        firstBeeTexture = TextureRegion(beeTexture).split(TILE_WIDTH,TILE_HEIGHT)[0][0]
-        secondBeeTexture = TextureRegion(beeTexture).split(TILE_WIDTH,TILE_HEIGHT)[0][1]
 
+        val flappeeTextures =
+                TextureRegion(beeTexture).split(TILE_WIDTH, TILE_HEIGHT)
+        animation = Animation(FRAME_DURATION, flappeeTextures[0][0], flappeeTextures[0][1])
+        animation.playMode = Animation.PlayMode.LOOP
     }
 
     override fun dispose() {

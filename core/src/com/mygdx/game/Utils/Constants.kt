@@ -23,6 +23,7 @@ class Constants {
         const val FLY_ACCEL = 5f
         const val TILE_WIDTH = 118
         const val TILE_HEIGHT = 118
+        const val FRAME_DURATION = 0.125f
 
         //Flower
         const val COLLISION_RECTANGLE_WIDTH = 13f

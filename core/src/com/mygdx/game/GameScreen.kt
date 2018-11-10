@@ -16,6 +16,7 @@ import com.mygdx.game.Entities.Flower
 import com.mygdx.game.FlappeeBeeGame.Companion.bgTexture
 import com.mygdx.game.Utils.Constants
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_WIDTH
+import com.mygdx.game.Utils.Constants.Companion.HEIGHT_OFFSET
 import com.mygdx.game.Utils.Constants.Companion.WORLD_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.WORLD_WIDTH
 import ktx.app.KtxScreen
@@ -39,6 +40,7 @@ class GameScreen : KtxScreen {
 
     private fun restart() {
         flapee.position.set(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
+        flapee.animationTimer = 0f
         flowers.clear()
         score = 0
         info { "Game restarted." }
@@ -115,7 +117,7 @@ class GameScreen : KtxScreen {
     private fun createNewFlower() {
         flowers.add(Flower(Vector2(
                 WORLD_WIDTH + Constants.WIDTH,
-                random(Constants.HEIGHT_OFFSET))))
+                random(-50f, HEIGHT_OFFSET))))
     }
 
     private fun removeFlowersIfPassed() {
