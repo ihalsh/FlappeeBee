@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.MathUtils.random
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Align
@@ -14,6 +13,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.Entities.Flappee
 import com.mygdx.game.Entities.Flower
+import com.mygdx.game.FlappeeBeeGame.Companion.bgTexture
 import com.mygdx.game.Utils.Constants
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_WIDTH
 import com.mygdx.game.Utils.Constants.Companion.WORLD_HEIGHT
@@ -61,25 +61,40 @@ class GameScreen : KtxScreen {
         viewport.apply()
         clearScreen(BLACK.r, BLACK.g, BLACK.b)
         batch.projectionMatrix = viewport.camera.combined
-        batch.use { drawScore() }
 
+        batch.use {
+            drawBackground(it)
+            drawFlowers(it)
+            flapee.draw(it)
+            drawScore(it)
+        }
         with(shapeRenderer) {
             setAutoShapeType(true)
             projectionMatrix = viewport.camera.combined
             begin()
-            flapee.drawDebug(this)
-            for (flower in flowers) flower.drawDebug(this)
+//            flapee.drawDebug(this)
+//            for (flower in flowers) flower.drawDebug(this)
             end()
         }
+
+
     }
 
-    private fun drawScore() {
+    private fun drawScore(batch: SpriteBatch) {
         val scoreString = "Score: $score\nBest score: $maxScore"
         glyphLayout.setText(bitmapFont, scoreString, WHITE, 0f, Align.left, false)
         bitmapFont.draw(batch,
                 scoreString,
                 COLLISION_RECTANGLE_WIDTH,
                 viewport.worldHeight - COLLISION_RECTANGLE_WIDTH)
+    }
+
+    private fun drawBackground(batch: SpriteBatch) {
+        batch.draw(bgTexture, 0f, 0f)
+    }
+
+    private fun drawFlowers(batch: SpriteBatch) {
+        for (flower in flowers) flower.draw(batch)
     }
 
     private fun updateScore() {
@@ -114,5 +129,11 @@ class GameScreen : KtxScreen {
 
     override fun resize(width: Int, height: Int) {
         viewport.update(width, height, true)
+    }
+
+    override fun dispose() {
+        shapeRenderer.dispose()
+        batch.dispose()
+        bitmapFont.dispose()
     }
 }

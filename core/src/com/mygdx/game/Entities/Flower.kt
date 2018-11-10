@@ -1,15 +1,21 @@
 package com.mygdx.game.Entities
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Circle
+import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.FlappeeBeeGame
+import com.mygdx.game.FlappeeBeeGame.Companion.flowerBottomTexture
+import com.mygdx.game.FlappeeBeeGame.Companion.flowerTopTexture
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_CIRCLE_RADIUS
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_WIDTH
 import com.mygdx.game.Utils.Constants.Companion.DISTANCE_BETWEEN_FLOOR_AND_CEILING
+import com.mygdx.game.Utils.Constants.Companion.FLOWER_BOTTOM
+import com.mygdx.game.Utils.Constants.Companion.FLOWER_TOP
 import com.mygdx.game.Utils.Constants.Companion.MAX_SPEED_PER_SECOND
-import com.badlogic.gdx.math.Intersector
 
 
 class Flower(val position: Vector2 = Vector2(), var pointClaimed: Boolean = false) {
@@ -51,6 +57,17 @@ class Flower(val position: Vector2 = Vector2(), var pointClaimed: Boolean = fals
                         ceilingCollisionRectangle) ||
                 Intersector.overlaps(flappeeCollisionCircle,
                         floorCollisionRectangle)
+    }
+
+    fun draw(batch: SpriteBatch) {
+        batch.draw(flowerBottomTexture,
+                (floorCollisionCircle.x - flowerBottomTexture.width / 2),
+                position.y + COLLISION_CIRCLE_RADIUS
+        )
+        batch.draw(flowerTopTexture,
+                (floorCollisionCircle.x - flowerTopTexture.width / 2),
+                position.y + flowerTopTexture.height + DISTANCE_BETWEEN_FLOOR_AND_CEILING
+                        - COLLISION_CIRCLE_RADIUS)
     }
 
     fun drawDebug(shapeRenderer: ShapeRenderer) {

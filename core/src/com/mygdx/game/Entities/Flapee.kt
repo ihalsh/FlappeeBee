@@ -3,9 +3,14 @@ package com.mygdx.game.Entities
 import com.badlogic.gdx.Gdx.input
 import com.badlogic.gdx.Input.Keys.SPACE
 import com.badlogic.gdx.graphics.Color.WHITE
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
+import com.mygdx.game.FlappeeBeeGame
+import com.mygdx.game.FlappeeBeeGame.Companion.beeTexture
+import com.mygdx.game.FlappeeBeeGame.Companion.firstBeeTexture
+import com.mygdx.game.Utils.Constants
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RADIUS
 import com.mygdx.game.Utils.Constants.Companion.DIVE_ACCEL
 import com.mygdx.game.Utils.Constants.Companion.FLY_ACCEL
@@ -25,6 +30,12 @@ class Flappee(val position: Vector2 = Vector2()) {
         position.set(position.x, MathUtils.clamp(position.y,
                 0f + COLLISION_RADIUS,
                 WORLD_HEIGHT - COLLISION_RADIUS))
+    }
+
+    fun draw (batch: SpriteBatch){
+        batch.draw(firstBeeTexture,
+                position.x - firstBeeTexture.regionWidth / 2,
+                position.y - firstBeeTexture.regionHeight / 2)
     }
 
     fun drawDebug(shapeRenderer: ShapeRenderer) {

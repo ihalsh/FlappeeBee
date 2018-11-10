@@ -1,5 +1,9 @@
 package com.mygdx.game.Utils
 
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Gdx.files
+import com.badlogic.gdx.graphics.Texture
+
 class Constants {
 
     companion object {
@@ -7,10 +11,18 @@ class Constants {
         const val WORLD_WIDTH = 480f
         const val WORLD_HEIGHT = 640f
 
+        //Textures
+        const val BACKGROUND = "bg.png"
+        const val FLOWER_TOP = "flowerTop.png"
+        const val FLOWER_BOTTOM = "flowerBottom.png"
+        const val BEE = "bee.png"
+
         //Flapee
         const val COLLISION_RADIUS = 24f
-        const val DIVE_ACCEL = 0.3f
+        const val DIVE_ACCEL = 1f
         const val FLY_ACCEL = 5f
+        const val TILE_WIDTH = 118
+        const val TILE_HEIGHT = 118
 
         //Flower
         const val COLLISION_RECTANGLE_WIDTH = 13f
@@ -20,6 +32,6 @@ class Constants {
         const val WIDTH = COLLISION_CIRCLE_RADIUS * 2
         const val GAP_BETWEEN_FLOWERS = 200f
         const val HEIGHT_OFFSET = -400f
-        const val DISTANCE_BETWEEN_FLOOR_AND_CEILING = 225f
+        const val DISTANCE_BETWEEN_FLOOR_AND_CEILING = 300f//225f
     }
 }
