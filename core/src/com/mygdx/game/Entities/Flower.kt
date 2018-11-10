@@ -12,7 +12,7 @@ import com.mygdx.game.Utils.Constants.Companion.MAX_SPEED_PER_SECOND
 import com.badlogic.gdx.math.Intersector
 
 
-class Flower(val position: Vector2 = Vector2()) {
+class Flower(val position: Vector2 = Vector2(), var pointClaimed: Boolean = false) {
 
     private val floorCollisionRectangle: Rectangle = Rectangle(
             position.x,

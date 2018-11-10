@@ -1,29 +1,41 @@
 package com.mygdx.game
 
 import com.badlogic.gdx.graphics.Color.BLACK
+import com.badlogic.gdx.graphics.Color.WHITE
+import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.MathUtils.random
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.DelayedRemovalArray
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.mygdx.game.Entities.Flappee
 import com.mygdx.game.Entities.Flower
 import com.mygdx.game.Utils.Constants
+import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_WIDTH
 import com.mygdx.game.Utils.Constants.Companion.WORLD_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.WORLD_WIDTH
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
+import ktx.graphics.use
 import ktx.log.info
+
 
 class GameScreen : KtxScreen {
 
     private val shapeRenderer = ShapeRenderer()
-    private val viewport: FitViewport = FitViewport(WORLD_WIDTH, WORLD_HEIGHT)
+    private val viewport = FitViewport(WORLD_WIDTH, WORLD_HEIGHT)
     private val batch = SpriteBatch()
+    private val bitmapFont = BitmapFont()
+    private val glyphLayout = GlyphLayout()
+
     private val flapee = Flappee(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
     private val flowers = DelayedRemovalArray<Flower>()
     private var score = 0
+    private var maxScore = 0
 
     private fun restart() {
         flapee.position.set(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
@@ -33,18 +45,23 @@ class GameScreen : KtxScreen {
     }
 
     override fun render(delta: Float) {
-        viewport.apply()
-        clearScreen(BLACK.r, BLACK.g, BLACK.b)
-        batch.projectionMatrix = viewport.camera.combined
-
         flapee.update(delta)
         checkIfNewFlowerIsNeeded()
+        updateScore()
+        draw()
         removeFlowersIfPassed()
         for (flower in flowers) {
             flower.update(delta)
             //Check for collision
             if (flower.isFlappeeColliding(flapee)) restart()
         }
+    }
+
+    private fun draw() {
+        viewport.apply()
+        clearScreen(BLACK.r, BLACK.g, BLACK.b)
+        batch.projectionMatrix = viewport.camera.combined
+        batch.use { drawScore() }
 
         with(shapeRenderer) {
             setAutoShapeType(true)
@@ -53,6 +70,24 @@ class GameScreen : KtxScreen {
             flapee.drawDebug(this)
             for (flower in flowers) flower.drawDebug(this)
             end()
+        }
+    }
+
+    private fun drawScore() {
+        val scoreString = "Score: $score\nBest score: $maxScore"
+        glyphLayout.setText(bitmapFont, scoreString, WHITE, 0f, Align.left, false)
+        bitmapFont.draw(batch,
+                scoreString,
+                COLLISION_RECTANGLE_WIDTH,
+                viewport.worldHeight - COLLISION_RECTANGLE_WIDTH)
+    }
+
+    private fun updateScore() {
+        val flower = flowers.first()
+        if (flower.position.x < flapee.position.x && !flower.pointClaimed) {
+            flower.pointClaimed = true
+            score++
+            maxScore = Math.max(score, maxScore)
         }
     }
 

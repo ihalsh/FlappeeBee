@@ -9,8 +9,8 @@ object DesktopLauncher {
     fun main(arg: Array<String>) {
         val config = LwjglApplicationConfiguration()
         with(config) {
-            width = 240
-            height = 320
+            width = 480
+            height = 640
         }
         LwjglApplication(FlappeeBeeGame(), config)
     }
