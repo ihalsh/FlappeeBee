@@ -15,8 +15,9 @@ import ktx.graphics.circle
 class Flappee(private val position: Vector2 = Vector2()) {
 
     fun update(delta: Float) {
-        position.set(Vector2(position.x, position.y - DIVE_ACCEL))
-        if (input.isKeyPressed(SPACE)) flyUp()
+        position.y -= DIVE_ACCEL
+        if (input.isKeyPressed(SPACE))
+            position.set(Vector2(position.x, position.y + FLY_ACCEL))
         blockFlappeeLeavingTheWorld()
     }
 
@@ -24,10 +25,6 @@ class Flappee(private val position: Vector2 = Vector2()) {
         position.set(position.x, MathUtils.clamp(position.y,
                 0f + COLLISION_RADIUS,
                 WORLD_HEIGHT - COLLISION_RADIUS))
-    }
-
-    fun flyUp() {
-        position.set(Vector2(position.x, position.y + FLY_ACCEL))
     }
 
     fun drawDebug(shapeRenderer: ShapeRenderer) {
