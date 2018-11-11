@@ -16,6 +16,10 @@ class Constants {
         const val FLOWER_TOP = "flowerTop.png"
         const val FLOWER_BOTTOM = "flowerBottom.png"
         const val BEE = "bee.png"
+        const val PLAY = "play.png"
+        const val PLAY_PRESSED = "playPress.png"
+        const val TITLE = "title.png"
+
 
         //Flapee
         const val COLLISION_RADIUS = 24f

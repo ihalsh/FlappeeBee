@@ -24,7 +24,6 @@ import ktx.app.clearScreen
 import ktx.graphics.use
 import ktx.log.info
 
-
 class GameScreen : KtxScreen {
 
     private val shapeRenderer = ShapeRenderer()
@@ -33,21 +32,21 @@ class GameScreen : KtxScreen {
     private val bitmapFont = BitmapFont()
     private val glyphLayout = GlyphLayout()
 
-    private val flapee = Flappee(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
+    private val flappee = Flappee(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
     private val flowers = DelayedRemovalArray<Flower>()
     private var score = 0
     private var maxScore = 0
 
     private fun restart() {
-        flapee.position.set(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
-        flapee.animationTimer = 0f
+        flappee.position.set(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
+        flappee.animationTimer = 0f
         flowers.clear()
         score = 0
         info { "Game restarted." }
     }
 
     override fun render(delta: Float) {
-        flapee.update(delta)
+        flappee.update(delta)
         checkIfNewFlowerIsNeeded()
         updateScore()
         draw()
@@ -55,7 +54,7 @@ class GameScreen : KtxScreen {
         for (flower in flowers) {
             flower.update(delta)
             //Check for collision
-            if (flower.isFlappeeColliding(flapee)) restart()
+            if (flower.isFlappeeColliding(flappee)) restart()
         }
     }
 
@@ -67,14 +66,14 @@ class GameScreen : KtxScreen {
         batch.use {
             drawBackground(it)
             drawFlowers(it)
-            flapee.draw(it)
+            flappee.draw(it)
             drawScore(it)
         }
         with(shapeRenderer) {
             setAutoShapeType(true)
             projectionMatrix = viewport.camera.combined
             begin()
-//            flapee.drawDebug(this)
+//            flappee.drawDebug(this)
 //            for (flower in flowers) flower.drawDebug(this)
             end()
         }
@@ -101,7 +100,7 @@ class GameScreen : KtxScreen {
 
     private fun updateScore() {
         val flower = flowers.first()
-        if (flower.position.x < flapee.position.x && !flower.pointClaimed) {
+        if (flower.position.x < flappee.position.x && !flower.pointClaimed) {
             flower.pointClaimed = true
             score++
             maxScore = Math.max(score, maxScore)
@@ -125,7 +124,6 @@ class GameScreen : KtxScreen {
             flowers.begin()
             flowers.removeValue(flowers.first(), true)
             flowers.end()
-            info { flowers.size.toString() }
         }
     }
 
