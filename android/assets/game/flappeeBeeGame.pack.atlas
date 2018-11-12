@@ -1,0 +1,34 @@
+
+flappeeBeeGame.pack.png
+size: 512,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bee
+  rotate: false
+  xy: 216, 364
+  size: 236, 118
+  orig: 236, 118
+  offset: 0, 0
+  index: -1
+beebnw
+  rotate: false
+  xy: 2, 2
+  size: 40, 31
+  orig: 40, 31
+  offset: 0, 0
+  index: -1
+flowerBottom
+  rotate: false
+  xy: 2, 35
+  size: 105, 447
+  orig: 105, 447
+  offset: 0, 0
+  index: -1
+flowerTop
+  rotate: false
+  xy: 109, 35
+  size: 105, 447
+  orig: 105, 447
+  offset: 0, 0
+  index: -1

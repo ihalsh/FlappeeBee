@@ -1,21 +1,27 @@
 package com.mygdx.game
 
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Gdx.files
 import com.badlogic.gdx.graphics.Color.BLACK
 import com.badlogic.gdx.graphics.Color.WHITE
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.MathUtils.random
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.DelayedRemovalArray
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.mygdx.game.Assets.Assets
 import com.mygdx.game.Assets.Assets.bgTexture
 import com.mygdx.game.Entities.Flappee
 import com.mygdx.game.Entities.Flower
 import com.mygdx.game.Utils.Constants
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_WIDTH
+import com.mygdx.game.Utils.Constants.Companion.FLAPPEE_BEE_ATLAS_GAME
+import com.mygdx.game.Utils.Constants.Companion.FONT_PATH
 import com.mygdx.game.Utils.Constants.Companion.HEIGHT_OFFSET
 import com.mygdx.game.Utils.Constants.Companion.WORLD_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.WORLD_WIDTH
@@ -30,7 +36,7 @@ class GameScreen : KtxScreen {
 
     private val viewport = FitViewport(WORLD_WIDTH, WORLD_HEIGHT)
     private val batch = SpriteBatch()
-    private val bitmapFont = BitmapFont()
+    private val bitmapFont = BitmapFont(files.internal(FONT_PATH))
     private val glyphLayout = GlyphLayout()
     private val flappee = Flappee(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
 
@@ -47,7 +53,7 @@ class GameScreen : KtxScreen {
     }
 
     override fun render(delta: Float) {
-//        batch.totalRenderCalls = 0
+        batch.totalRenderCalls = 0
 
         flappee.update(delta)
         checkIfNewFlowerIsNeeded()
@@ -60,7 +66,7 @@ class GameScreen : KtxScreen {
             if (flower.isFlappeeColliding(flappee)) restart()
         }
 
-//        info { "${batch.totalRenderCalls}" }
+        info { "${batch.totalRenderCalls}" }
     }
 
     private fun draw() {
@@ -87,7 +93,7 @@ class GameScreen : KtxScreen {
     }
 
     private fun drawScore(batch: SpriteBatch) {
-        val scoreString = "Score: $score\nBest score: $maxScore"
+        val scoreString = "Score: $score\nBest: $maxScore"
         glyphLayout.setText(bitmapFont, scoreString, WHITE, 0f, Align.left, false)
         bitmapFont.draw(batch,
                 scoreString,

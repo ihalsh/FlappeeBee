@@ -1,0 +1,34 @@
+
+flappeeBeeSplash.pack.png
+size: 512,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bg
+  rotate: false
+  xy: 2, 376
+  size: 480, 640
+  orig: 480, 640
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 2, 116
+  size: 180, 112
+  orig: 180, 112
+  offset: 0, 0
+  index: -1
+playPress
+  rotate: false
+  xy: 2, 2
+  size: 180, 112
+  orig: 180, 112
+  offset: 0, 0
+  index: -1
+title
+  rotate: false
+  xy: 2, 230
+  size: 310, 144
+  orig: 310, 144
+  offset: 0, 0
+  index: -1

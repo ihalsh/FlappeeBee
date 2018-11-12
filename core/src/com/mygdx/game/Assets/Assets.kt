@@ -3,7 +3,9 @@ package com.mygdx.game.Assets
 import com.badlogic.gdx.assets.AssetDescriptor
 import com.badlogic.gdx.assets.AssetErrorListener
 import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.assets.loaders.BitmapFontLoader
 import com.badlogic.gdx.graphics.g2d.Animation
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.utils.Disposable
@@ -18,7 +20,8 @@ import com.mygdx.game.Utils.Constants.Companion.FLOWER_TOP
 import com.mygdx.game.Utils.Constants.Companion.PLAY
 import com.mygdx.game.Utils.Constants.Companion.PLAY_PRESSED
 import com.mygdx.game.Utils.Constants.Companion.TITLE
-import ktx.log.info
+import sun.security.krb5.internal.KDCOptions.with
+import java.awt.SystemColor.info
 
 object Assets : Disposable, AssetErrorListener {
 
@@ -50,9 +53,13 @@ object Assets : Disposable, AssetErrorListener {
     }
 
     fun loadAssets() {
+
+        val bitmapFontParameter = BitmapFontLoader.BitmapFontParameter().apply { atlasName = FLAPPEE_BEE_ATLAS_GAME }
+
         with(assetManager) {
             logger.level = Logger.INFO
             load(FLAPPEE_BEE_ATLAS_GAME, TextureAtlas::class.java)
+            load("score.fnt", BitmapFont::class.java, bitmapFontParameter)
             finishLoading()
         }
 
@@ -64,11 +71,12 @@ object Assets : Disposable, AssetErrorListener {
                 atlas.findRegion(BEE).split(Constants.TILE_WIDTH, Constants.TILE_HEIGHT)[0][0],
                 atlas.findRegion(BEE).split(Constants.TILE_WIDTH, Constants.TILE_HEIGHT)[0][1])
                 .apply { playMode = Animation.PlayMode.LOOP }
+
     }
 
     override fun dispose() {
         assetManager.dispose()
-        info { "Assets disposed...Ok" }
+        logger.info { "Assets disposed...Ok" }
     }
 
     override fun error(asset: AssetDescriptor<*>, throwable: Throwable) {

@@ -12,6 +12,7 @@ class Constants {
         //Textures
         const val FLAPPEE_BEE_ATLAS_SPLASH = "splash/flappeeBeeSplash.pack.atlas"
         const val FLAPPEE_BEE_ATLAS_GAME = "game/flappeeBeeGame.pack.atlas"
+        const val FONT_PATH = "score.fnt"
         const val BACKGROUND = "bg"
         const val FLOWER_TOP = "flowerTop"
         const val FLOWER_BOTTOM = "flowerBottom"
@@ -22,7 +23,7 @@ class Constants {
 
         //Flapee
         const val COLLISION_RADIUS = 24f
-        const val DIVE_ACCEL = 1f
+        const val DIVE_ACCEL = 2f
         const val FLY_ACCEL = 5f
         const val TILE_WIDTH = 118
         const val TILE_HEIGHT = 118
@@ -36,6 +37,6 @@ class Constants {
         const val WIDTH = COLLISION_CIRCLE_RADIUS * 2
         const val GAP_BETWEEN_FLOWERS = 200f
         const val HEIGHT_OFFSET = -400f
-        const val DISTANCE_BETWEEN_FLOOR_AND_CEILING = 300f//225f
+        const val DISTANCE_BETWEEN_FLOOR_AND_CEILING = 225f
     }
 }
