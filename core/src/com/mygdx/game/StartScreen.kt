@@ -44,7 +44,8 @@ class StartScreen(private val game: KtxGame<Screen>) : KtxScreen {
                     addListener(object : ActorGestureListener() {
                         override fun tap(event: InputEvent, x: Float, y: Float, count: Int, button: Int) {
                             super.tap(event, x, y, count, button)
-                            game.setScreen<LoadingScreen>()
+                            Assets.loadAssets()
+                            game.setScreen<GameScreen>()
                         }
                     })
                 }

@@ -57,12 +57,12 @@ class Flower(val position: Vector2 = Vector2(), var pointClaimed: Boolean = fals
 
     fun draw(batch: SpriteBatch) {
         batch.draw(flowerBottomTexture,
-                (floorCollisionCircle.x - flowerBottomTexture.width / 2),
+                (floorCollisionCircle.x - flowerBottomTexture.regionWidth / 2),
                 position.y + COLLISION_CIRCLE_RADIUS
         )
         batch.draw(flowerTopTexture,
-                (floorCollisionCircle.x - flowerTopTexture.width / 2),
-                position.y + flowerTopTexture.height + DISTANCE_BETWEEN_FLOOR_AND_CEILING
+                (floorCollisionCircle.x - flowerTopTexture.regionWidth / 2),
+                position.y + flowerTopTexture.regionHeight + DISTANCE_BETWEEN_FLOOR_AND_CEILING
                         - COLLISION_CIRCLE_RADIUS)
     }
 

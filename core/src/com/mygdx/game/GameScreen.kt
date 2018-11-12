@@ -47,6 +47,8 @@ class GameScreen : KtxScreen {
     }
 
     override fun render(delta: Float) {
+//        batch.totalRenderCalls = 0
+
         flappee.update(delta)
         checkIfNewFlowerIsNeeded()
         updateScore()
@@ -57,6 +59,8 @@ class GameScreen : KtxScreen {
             //Check for collision
             if (flower.isFlappeeColliding(flappee)) restart()
         }
+
+//        info { "${batch.totalRenderCalls}" }
     }
 
     private fun draw() {

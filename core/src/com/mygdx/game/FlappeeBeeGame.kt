@@ -10,7 +10,6 @@ class FlappeeBeeGame : KtxGame<Screen>() {
     override fun create() {
 
         // Registering screens
-        addScreen(LoadingScreen(this))
         addScreen(StartScreen(this))
         addScreen(GameScreen())
 

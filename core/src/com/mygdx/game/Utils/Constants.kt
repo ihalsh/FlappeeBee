@@ -10,13 +10,15 @@ class Constants {
         const val PROGRESS_BAR_HEIGHT = 25f
 
         //Textures
-        const val BACKGROUND = "bg.png"
-        const val FLOWER_TOP = "flowerTop.png"
-        const val FLOWER_BOTTOM = "flowerBottom.png"
-        const val BEE = "bee.png"
-        const val PLAY = "play.png"
-        const val PLAY_PRESSED = "playPress.png"
-        const val TITLE = "title.png"
+        const val FLAPPEE_BEE_ATLAS_SPLASH = "splash/flappeeBeeSplash.pack.atlas"
+        const val FLAPPEE_BEE_ATLAS_GAME = "game/flappeeBeeGame.pack.atlas"
+        const val BACKGROUND = "bg"
+        const val FLOWER_TOP = "flowerTop"
+        const val FLOWER_BOTTOM = "flowerBottom"
+        const val BEE = "bee"
+        const val PLAY = "play"
+        const val PLAY_PRESSED = "playPress"
+        const val TITLE = "title"
 
         //Flapee
         const val COLLISION_RADIUS = 24f
