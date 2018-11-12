@@ -1,15 +1,13 @@
 package com.mygdx.game.Utils
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Gdx.files
-import com.badlogic.gdx.graphics.Texture
-
 class Constants {
 
     companion object {
         //General
         const val WORLD_WIDTH = 480f
         const val WORLD_HEIGHT = 640f
+        const val PROGRESS_BAR_WIDTH = 100f
+        const val PROGRESS_BAR_HEIGHT = 25f
 
         //Textures
         const val BACKGROUND = "bg.png"
@@ -19,7 +17,6 @@ class Constants {
         const val PLAY = "play.png"
         const val PLAY_PRESSED = "playPress.png"
         const val TITLE = "title.png"
-
 
         //Flapee
         const val COLLISION_RADIUS = 24f

@@ -6,17 +6,13 @@ import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Intersector
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.FlappeeBeeGame
-import com.mygdx.game.FlappeeBeeGame.Companion.flowerBottomTexture
-import com.mygdx.game.FlappeeBeeGame.Companion.flowerTopTexture
+import com.mygdx.game.Assets.Assets.flowerBottomTexture
+import com.mygdx.game.Assets.Assets.flowerTopTexture
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_CIRCLE_RADIUS
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_WIDTH
 import com.mygdx.game.Utils.Constants.Companion.DISTANCE_BETWEEN_FLOOR_AND_CEILING
-import com.mygdx.game.Utils.Constants.Companion.FLOWER_BOTTOM
-import com.mygdx.game.Utils.Constants.Companion.FLOWER_TOP
 import com.mygdx.game.Utils.Constants.Companion.MAX_SPEED_PER_SECOND
-
 
 class Flower(val position: Vector2 = Vector2(), var pointClaimed: Boolean = false) {
 

@@ -11,10 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.mygdx.game.FlappeeBeeGame.Companion.bgTexture
-import com.mygdx.game.FlappeeBeeGame.Companion.playPressedTexture
-import com.mygdx.game.FlappeeBeeGame.Companion.playTexture
-import com.mygdx.game.FlappeeBeeGame.Companion.titleTexture
+import com.mygdx.game.Assets.Assets
+import com.mygdx.game.Assets.Assets.bgTexture
+import com.mygdx.game.Assets.Assets.loadSplashAssets
+import com.mygdx.game.Assets.Assets.playPressedTexture
+import com.mygdx.game.Assets.Assets.playTexture
+import com.mygdx.game.Assets.Assets.titleTexture
 import com.mygdx.game.Utils.Constants.Companion.WORLD_HEIGHT
 import com.mygdx.game.Utils.Constants.Companion.WORLD_WIDTH
 import ktx.app.KtxGame
@@ -25,6 +27,9 @@ class StartScreen(private val game: KtxGame<Screen>) : KtxScreen {
     private val stage = Stage(FitViewport(WORLD_WIDTH, WORLD_HEIGHT))
 
     override fun show() {
+        //Splash assets loading and initialization
+        loadSplashAssets()
+
         Gdx.input.inputProcessor = stage
 
         val background = Image(bgTexture)
@@ -39,8 +44,7 @@ class StartScreen(private val game: KtxGame<Screen>) : KtxScreen {
                     addListener(object : ActorGestureListener() {
                         override fun tap(event: InputEvent, x: Float, y: Float, count: Int, button: Int) {
                             super.tap(event, x, y, count, button)
-                            game.setScreen<GameScreen>()
-                            dispose()
+                            game.setScreen<LoadingScreen>()
                         }
                     })
                 }
@@ -63,8 +67,5 @@ class StartScreen(private val game: KtxGame<Screen>) : KtxScreen {
 
     override fun dispose() {
         stage.dispose()
-        playTexture.dispose()
-        playPressedTexture.dispose()
-        titleTexture.dispose()
     }
 }

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
-import com.mygdx.game.FlappeeBeeGame.Companion.animation
+import com.mygdx.game.Assets.Assets.animation
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RADIUS
 import com.mygdx.game.Utils.Constants.Companion.DIVE_ACCEL
 import com.mygdx.game.Utils.Constants.Companion.FLY_ACCEL

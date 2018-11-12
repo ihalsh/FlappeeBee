@@ -11,9 +11,9 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.DelayedRemovalArray
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.mygdx.game.Assets.Assets.bgTexture
 import com.mygdx.game.Entities.Flappee
 import com.mygdx.game.Entities.Flower
-import com.mygdx.game.FlappeeBeeGame.Companion.bgTexture
 import com.mygdx.game.Utils.Constants
 import com.mygdx.game.Utils.Constants.Companion.COLLISION_RECTANGLE_WIDTH
 import com.mygdx.game.Utils.Constants.Companion.HEIGHT_OFFSET
@@ -27,12 +27,13 @@ import ktx.log.info
 class GameScreen : KtxScreen {
 
     private val shapeRenderer = ShapeRenderer()
+
     private val viewport = FitViewport(WORLD_WIDTH, WORLD_HEIGHT)
     private val batch = SpriteBatch()
     private val bitmapFont = BitmapFont()
     private val glyphLayout = GlyphLayout()
-
     private val flappee = Flappee(Vector2(WORLD_WIDTH / 4, WORLD_HEIGHT / 2))
+
     private val flowers = DelayedRemovalArray<Flower>()
     private var score = 0
     private var maxScore = 0
